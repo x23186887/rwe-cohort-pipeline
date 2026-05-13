@@ -88,7 +88,7 @@ meta = [
     ["Data Source:",   "Synthea Synthetic EMR v3.x · Massachusetts · n = 5,000"],
     ["Analysis Date:", str(date.today())],
     ["Pipeline:",      "Bronze → Silver → Gold (PostgreSQL + Python)"],
-    ["Status:",        "⚠️  Synthetic Data Only — Not for Clinical Use"],
+    ["Status:",        " Synthetic Data Only — Not for Clinical Use"],
 ]
 mt = Table(meta, colWidths=[4*cm, 13*cm])
 mt.setStyle(TableStyle([
@@ -231,11 +231,11 @@ story.append(Spacer(1, 0.5*cm))
 story.append(HRFlowable(width="100%", thickness=1, color=colors.lightgrey))
 story.append(Spacer(1, 0.2*cm))
 story.append(Paragraph(
-    "⚠️ DISCLAIMER: Generated from entirely synthetic data (Synthea) for portfolio demonstration "
+    " DISCLAIMER: Generated from entirely synthetic data (Synthea) for portfolio demonstration "
     "only. Does not contain or represent real patient information. Not for clinical, regulatory, "
     "or commercial use.", SM))
 
 doc.build(story)
-print(f"\n✅ PDF saved to: {OUTPUT}")
+print(f"\n PDF saved to: {OUTPUT}")
 print("Open File Explorer → D:\\projects\\healthcare\\rwe\\reports\\")
-print("\n✅ REPORT COMPLETE!")
+print("\n REPORT COMPLETE!")

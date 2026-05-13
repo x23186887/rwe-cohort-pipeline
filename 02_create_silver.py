@@ -40,7 +40,7 @@ mapping_data = [
 
 mapping_df = pd.DataFrame(mapping_data)
 mapping_df.to_sql("code_mapping", engine, schema="silver", if_exists="replace", index=False)
-print(f"✅ Mapping table created: {len(mapping_df)} mappings")
+print(f" Mapping table created: {len(mapping_df)} mappings")
 
 # ── STEP B: Check top conditions ──────────────────────────────
 print("\nChecking top conditions in your data...")
@@ -78,7 +78,7 @@ print(f"Total MG records:  {len(mg_combined)}")
 
 # ── STEP D: Proxy if MG not found ─────────────────────────────
 if len(mg_combined) == 0:
-    print("\n⚠️  No MG patients — expected for Synthea.")
+    print("\n  No MG patients — expected for Synthea.")
     print("   Using Type 2 Diabetes as proxy.\n")
 
     USE_PROXY     = True
@@ -92,13 +92,13 @@ if len(mg_combined) == 0:
            OR LOWER("DESCRIPTION") LIKE '%type 2 diabetes%'
            OR LOWER("DESCRIPTION") LIKE '%diabetes mellitus type 2%'
     """)
-    print(f"✅ Proxy records found: {len(study_conditions):,}")
+    print(f" Proxy records found: {len(study_conditions):,}")
 else:
     USE_PROXY     = False
     DISEASE_NAME  = "Myasthenia Gravis"
     DISEASE_SHORT = "mg"
     study_conditions = mg_combined
-    print(f"✅ MG records: {len(study_conditions):,}")
+    print(f" MG records: {len(study_conditions):,}")
 
 # Save config
 with open(r"D:\projects\healthcare\rwe\data\disease_config.txt", "w") as f:
@@ -107,7 +107,7 @@ with open(r"D:\projects\healthcare\rwe\data\disease_config.txt", "w") as f:
     f.write(f"USE_PROXY={USE_PROXY}\n")
 
 # ── STEP E: Phenotyping — 2+ encounters rule ───────────────────
-print(f"\nApplying phenotyping algorithm (≥2 coded encounters)...")
+print(f"\n Applying phenotyping algorithm (≥2 coded encounters)...")
 
 # Uppercase all column names for consistency
 study_conditions.columns = [c.upper() for c in study_conditions.columns]
@@ -169,7 +169,7 @@ cohort['is_deceased'] = cohort[dd_col].notna().astype(int)
 cohort.to_sql(f"{DISEASE_SHORT}_cohort", engine, schema="silver",
               if_exists="replace", index=False)
 
-print(f"\n✅ Silver cohort saved: silver.{DISEASE_SHORT}_cohort")
+print(f"\n Silver cohort saved: silver.{DISEASE_SHORT}_cohort")
 print(f"   Total patients: {len(cohort):,}")
 
 print("\n── DEMOGRAPHICS PREVIEW ──")
@@ -179,4 +179,4 @@ print(f"Deceased:   {cohort['is_deceased'].mean()*100:.1f}%")
 print(f"\nAge groups:\n{cohort['age_group'].value_counts().sort_index()}")
 print(f"\nRace:\n{cohort[rc_col].value_counts()}")
 
-print("\n✅ SILVER LAYER COMPLETE!")
+print("\n SILVER LAYER COMPLETE!")

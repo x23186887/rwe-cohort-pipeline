@@ -131,7 +131,7 @@ for i, pid in enumerate(patient_ids):
         print(f"  {i+1}/{len(patient_ids)} done...")
 
 cci_df = pd.DataFrame(cci_rows)
-print(f"✅ CCI computed for {len(cci_df):,} patients")
+print(f" CCI computed for {len(cci_df):,} patients")
 print(f"   Median CCI: {cci_df['cci_score'].median()}")
 print(f"   Mean CCI:   {cci_df['cci_score'].mean():.2f}")
 
@@ -149,7 +149,7 @@ med_counts = cohort_meds.groupby('PATIENT').agg(
 top_meds = cohort_meds['DESCRIPTION'].value_counts().head(20).reset_index()
 top_meds.columns = ['medication', 'frequency']
 top_meds.to_csv(r"D:\projects\healthcare\rwe\data\top_medications.csv", index=False)
-print(f"✅ Medication data computed")
+print(f" Medication data computed")
 
 # ── HEALTHCARE UTILISATION ─────────────────────────────────────
 print("Computing healthcare utilisation...")
@@ -167,7 +167,7 @@ hosp = cohort_enc[
     n_hospitalisations = ('ID', 'count')
 ).reset_index()
 
-print(f"✅ Utilisation data computed")
+print(f" Utilisation data computed")
 
 # ── ASSEMBLE GOLD TABLE ────────────────────────────────────────
 print("\nAssembling Gold table...")
@@ -198,14 +198,14 @@ gold.to_sql(f"{DISEASE_SHORT}_characterised", engine, schema="gold",
 
 gold.to_csv(r"D:\projects\healthcare\rwe\data\gold_cohort.csv", index=False)
 
-print(f"\n✅ Gold table saved: gold.{DISEASE_SHORT}_characterised")
+print(f"\n Gold table saved: gold.{DISEASE_SHORT}_characterised")
 
 # ── PRINT FULL SUMMARY ─────────────────────────────────────────
 print("\n" + "=" * 60)
 print(f"COHORT CHARACTERISATION — {DISEASE_NAME.upper()}")
 print("=" * 60)
 
-print(f"\n📊 POPULATION")
+print(f"\n POPULATION")
 print(f"   Total patients:           {len(gold):,}")
 print(f"   Deceased:                 {gold['is_deceased'].sum():,} ({gold['is_deceased'].mean()*100:.1f}%)")
 
@@ -221,18 +221,18 @@ print(gold['age_group'].value_counts().sort_index().to_string())
 print(f"\n   Race:")
 print(gold['RACE'].value_counts().to_string())
 
-print(f"\n🏥 COMORBIDITY (CCI)")
+print(f"\n COMORBIDITY (CCI)")
 print(f"   Median CCI:               {gold['cci_score'].median():.1f}")
 print(f"   Mean CCI:                 {gold['cci_score'].mean():.2f}")
 print(f"\n   CCI Risk Categories:")
 print(gold['cci_risk_category'].value_counts().sort_index().to_string())
 
-print(f"\n💊 MEDICATIONS")
+print(f"\n MEDICATIONS")
 print(f"   Median unique meds:       {gold['n_unique_meds'].median():.0f}")
 print(f"   Mean unique meds:         {gold['n_unique_meds'].mean():.1f}")
 
-print(f"\n🏨 HEALTHCARE UTILISATION")
+print(f"\n HEALTHCARE UTILISATION")
 print(f"   Median total encounters:  {gold['total_encounters'].median():.0f}")
 print(f"   Median hospitalisations:  {gold['n_hospitalisations'].median():.0f}")
 
-print("\n✅ GOLD LAYER COMPLETE!")
+print("\n GOLD LAYER COMPLETE!")

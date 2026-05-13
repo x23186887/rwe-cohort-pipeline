@@ -153,7 +153,7 @@ app.layout = html.Div(
         html.Div(style={"padding": "10px 36px 20px",
                         "color": "#aaa", "fontSize": "11px", "textAlign": "center"},
                  children=[html.P(
-                     "⚠️ SYNTHETIC DATA ONLY — Synthea EMR | Not for clinical use"
+                     " SYNTHETIC DATA ONLY — Synthea EMR | Not for clinical use"
                  )])
     ]
 )

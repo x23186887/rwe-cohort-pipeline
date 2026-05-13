@@ -1,0 +1,3 @@
+DISEASE_NAME=Type 2 Diabetes (Proxy for MG Pipeline Demo)
+DISEASE_SHORT=diabetes_proxy
+USE_PROXY=True

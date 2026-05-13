@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+
+# Data files (too large for GitHub)
+data/gold_cohort.csv
+data/bronze_quality_report.csv
+
+# Sensitive
+config.py
+
+# Synthea output (too large)
+synthea/output/
+
